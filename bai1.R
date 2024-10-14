@@ -1,7 +1,10 @@
 library(ggplot2)
 
+# Sử dụng dataframe diamonds với tên khác
+diamond_data <- diamonds
+
 # Tóm tắt số lượng kim cương theo kiểu cắt
-df_summary <- as.data.frame(table(df$cut))
+df_summary <- as.data.frame(table(diamond_data$cut))
 names(df_summary) <- c("cut", "count")
 
 # Tạo biểu đồ
