@@ -1,19 +1,22 @@
 library(ggplot2)
-df <- diamonds
 
-df_summary <- aggregate(carat ~ cut, df, FUN = length)
-names(df_summary)[2] <- "count"
+# Tóm tắt số lượng kim cương theo kiểu cắt
+df_summary <- as.data.frame(table(df$cut))
+names(df_summary) <- c("cut", "count")
 
-ggplot(data = df_summary, mapping = aes(x = cut, y = count)) +
+# Tạo biểu đồ
+ggplot(df_summary, aes(x = cut, y = count)) +
   geom_col(color = "navy", fill = "#00FFFF", width = 0.6) +
   theme_bw() +
-  labs(x = "Cut", y = "Count",
-       title = "Counting of Diamonds") +
+  labs(
+    x = "Kiểu cắt",
+    y = "Số lượng",
+    title = "Số lượng Kim cương"
+  ) +
   theme(
-    panel.grid.minor = element_blank(),
-    panel.grid.major = element_blank(),
+    panel.grid = element_blank(),
     panel.background = element_rect(fill = "#EEEEEE"),
-    plot.title = element_text(face = "bold", size = 18, hjust = 0.5,colour = "red"),
+    plot.title = element_text(face = "bold", size = 18, hjust = 0.5, colour = "red"),
     axis.title = element_text(face = "bold", size = 14),
     axis.text = element_text(colour = "black"),
     axis.ticks = element_line(colour = "red"),
